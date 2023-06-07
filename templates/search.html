@@ -1,0 +1,136 @@
+{% load static %}
+{# treasure bg color: #ffc654 #}
+{# door bg color: #e7daa7 #}
+{# border color: #270b00 #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Munchkin Card Search</title>
+    <style>
+        @font-face {
+            font-family: 'Munchkin';
+            src: url('{% static 'fonts/Munchkin.ttf' %}') format('truetype');
+        }
+        * {
+            font-family: 'Munchkin', sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            margin: 20px;
+            font-family: unset;
+        }
+        .card {
+            height: 320px;
+            width: 200px;
+            margin: 20px;
+            border: 15px solid #270b00;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-flow: column;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+        .card-header {
+            text-align: center;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .card-footer .right {
+            text-align: right;
+        }
+        .card-footer .right h4 {
+            margin-top: 5px;
+        }
+        h2 {
+            font-size: 1.5em;
+        }
+        h3 {
+            font-size: 1.1em;
+            padding-top: 5px;
+        }
+        h4 {
+            font-size: 0.8em;
+        }
+        p {
+            font-size: 0.8em;
+        }
+        .door {
+            background-color: #e7daa7;
+        }
+        h2.big-desc {
+            font-size: 1.2em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Search">
+    </form>
+
+    {% if card %}
+        <div class="card door">
+            <div class="card-header">
+                {% if card.bonus %}
+                    <h3>+{{ card.bonus }} Бонус</h3>
+                {% endif %}
+                {% if card.level %}
+                    <h3>Уровень {{ card.level }}</h3>
+                {% endif %}
+                {% if card.undead %}
+                    <h4 style="margin-top: 5px;">Андед</h4>
+                {% endif %}
+                <h2>{{ card.name_ru }}</h2>
+                {% if card.modifier %}
+                    {% if card.modifier > 0 %}
+                        <h3>+{{ card.modifier }} для монстра</h3>
+                    {% else %}
+                        <h3>{{ card.modifier }} для монстра</h3>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="card-desc">
+                {% if card.card_type == 'Проклятие' %}
+                    <h2 class="big-desc">{{ card.description_ru }}</h2>
+                {% else %}
+                    <p>{{ card.description_ru|safe }}</p>
+                    {% if card.bad_stuff %}
+                        <p><br><strong>Непотребство: </strong>{{ card.bad_stuff }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <div class="left">
+                    {% if card.get_two_levels %}
+                        <h4>2 Уровня</h4>
+                    {% elif card.is_big %}
+                        <h4>Большой</h4>
+                    {% endif %}
+                </div>
+                <div class="right">
+                    {% if card.card_type == 'Скакун' %}
+                        <h4>Скакун</h4>
+                    {% endif %}
+                    {% if card.treasures %}
+                        <h4>{{ card.treasures }} Сокровищ</h4>
+                    {% elif card.price %}
+                        <h4>{{ card.price }} Голдов</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if error_message %}
+        <h2 style="padding: 20px">{{ error_message }}</h2>
+    {% endif %}
+</body>
+</html>
