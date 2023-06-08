@@ -65,6 +65,7 @@ class Misc(Card):
 
 class TreasureCard(Card):
     bonus = models.IntegerField(blank=True, null=True)
+    only_for = models.CharField(max_length=200, blank=True, null=True)
     attr_upper_left = models.CharField(max_length=100, blank=True, null=True)
     attr_lower_left = models.CharField(max_length=100, blank=True, null=True)
     attr_upper_right = models.CharField(max_length=100, blank=True, null=True)

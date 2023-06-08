@@ -70,6 +70,7 @@
         h2.big-desc {
             font-size: 1.2em;
             text-align: center;
+            margin-top: 20px;
         }
         input[type="submit"] {
             margin-top: 5px;
@@ -110,6 +111,9 @@
             <div class="card-header">
                 {% if card.bonus %}
                     <h3>Бонус +{{ card.bonus }}</h3>
+                {% endif %}
+                {% if card.only_for %}
+                    <h4 style="margin-top: 5px;">{{ card.only_for }}</h4>
                 {% endif %}
                 <h2>{{ card.name_ru }}</h2>
             </div>
