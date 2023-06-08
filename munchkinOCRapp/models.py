@@ -62,3 +62,12 @@ class Curse(Card):
 class Misc(Card):
     card_type = ""
 
+
+class TreasureCard(Card):
+    bonus = models.IntegerField(blank=True, null=True)
+    attr_upper_left = models.CharField(max_length=100, blank=True, null=True)
+    attr_lower_left = models.CharField(max_length=100, blank=True, null=True)
+    attr_upper_right = models.CharField(max_length=100, blank=True, null=True)
+    attr_lower_right = models.CharField(max_length=100, blank=True, null=True)
+    big_desc = models.TextField(blank=True, null=True)
+    card_type = "Сокровище"

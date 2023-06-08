@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Hireling, Steed, Monster, MonsterModifier, Race, Class, Curse, Misc
+from .models import Hireling, Steed, Monster, MonsterModifier, Race, Class, Curse, Misc, TreasureCard
 # Register your models here.
 
 admin.site.register(Hireling)
@@ -10,3 +10,4 @@ admin.site.register(Race)
 admin.site.register(Class)
 admin.site.register(Curse)
 admin.site.register(Misc)
+admin.site.register(TreasureCard)
