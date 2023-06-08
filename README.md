@@ -10,4 +10,4 @@ but later on agreed that it is too much work for such a simple project
 and just drop-down choice list would suffice.
 
 # How to use
-The project is deployed at [Python Anywhere](mmmashneyshiy.pythonanywhere.com)
+The project is deployed at [Python Anywhere](https://mmmashneyshiy.pythonanywhere.com/)
